@@ -1,10 +1,8 @@
 package org.launchcode.models.forms;
 
-import org.launchcode.models.CoreCompetency;
-import org.launchcode.models.Employer;
-import org.launchcode.models.Location;
-import org.launchcode.models.PositionType;
+import org.launchcode.models.*;
 import org.launchcode.models.data.JobData;
+import org.springframework.boot.autoconfigure.batch.BatchProperties;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,8 +17,16 @@ public class JobForm {
     @Size(min=1, message = "Name may not be empty")
     private String name;
 
+
     @NotNull
     private int employerId;
+
+
+    private int locationId;
+    private int coreCompetencyId;
+    private int positionTypeId;
+
+
 
     /*
         TODO #3 - Included other fields needed to create a job,
@@ -42,6 +48,9 @@ public class JobForm {
         */
 
         employers = jobData.getEmployers().findAll();
+        locations = jobData.getLocations().findAll();
+        coreCompetencies = jobData.getCoreCompetencies().findAll();
+        positionTypes = jobData.getPositionTypes().findAll();
 
     }
 
@@ -91,5 +100,29 @@ public class JobForm {
 
     public void setPositionTypes(ArrayList<PositionType> positionTypes) {
         this.positionTypes = positionTypes;
+    }
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public int getCoreCompetencyId() {
+        return coreCompetencyId;
+    }
+
+    public void setCoreCompetencyId(int coreCompetencyId) {
+        this.coreCompetencyId = coreCompetencyId;
+    }
+
+    public int getPositionTypeId() {
+        return positionTypeId;
+    }
+
+    public void setPositionTypeId(int positionTypeId) {
+        this.positionTypeId = positionTypeId;
     }
 }
